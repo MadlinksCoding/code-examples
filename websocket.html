@@ -1,1 +1,55 @@
-websocket
+<html>
+  <head>
+    <script>
+      var userData = {"userID":"1","UID":"aW15RzZkQ2xRTG5zeTRjRGFsaGRlQT09OmQ0MjQ5ZjRjY2EwOGE5ZGE=","userDisplayName":"Lindenxxxda Lindenzzzzzxxfaa","userProfileName":"lindendevtesttest2","userAvatar":"https:\/\/fansocial-user-media.s3-accelerate.amazonaws.com\/user-1\/images\/4QsSTv9hFCkJK3gpvtuxlTFcpW99EO\/4QsSTv9hFCkJK3gpvtuxlTFcpW99EO.png","jwtToken":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2ZzLmNvZGVsaW5kZW4uY29tIiwiYXVkIjoiaHR0cHM6Ly9mcy5jb2RlbGluZGVuLmNvbSIsImlhdCI6MTczNTExMzcyNiwiZXhwIjoxNzM1MTM1MzI2LCJkYXRhIjp7InVzZXJfaWQiOjEsImlwIjoiNTguMTc4LjIzLjE1MSJ9fQ.p_sWTn-xDrbCTJ7TYSVaIeQX-oDXi72DMSxzXmS5aqc"};
+    </script>
+
+    <script src="https://fs.codelinden.com/wp-content/plugins/fansocial/assets/FINAL/js/main.js"></script>
+    <script src="https://fs.codelinden.com/wp-content/plugins/fansocial/assets/FINAL/js/socket.js"></script>
+  </head>
+  
+<body>
+  <code>
+    alert('socket');
+// Example usage for the socket sendMessage() function.
+function sendChatMessage() {
+    // Payload for the message.
+    const jsonPayloadForMsg = {
+        userID: socketCurrentLoggedInUid, // Sender UID.
+        recipientID: recipientID, // Receiver UID.
+        flag: 'handleAddMessage', // Name of the function called on the receiver's end.
+        data: { // Payload sent through the WebSocket.
+            name: 'Abc'
+        }
+    };
+
+    // Send the message through the WebSocket.
+    sendMessage(jsonPayloadForMsg);
+    console.log("-> sendChatMessage Chat message sent through WebSocket", ["data = " + JSON.stringify(jsonPayloadForMsg), "filename = socket.js", "reference_code = N8rL5"]);
+}
+
+// Add an event listener for receiving messages.
+socket.addEventListener('message', (event) => {
+    console.log("-> socket Received message from WebSocket", ["data = " + event.data, "filename = socket.js", "reference_code = L4nD6"]);
+
+    // Check if the message is not empty or undefined.
+    if (event.data) {
+        // Parse the received event data.
+        const parseData = JSON.parse(event.data);
+        let flag = parseData?.flag;
+
+        if (flag === "handleSocketMessage") {
+            handleSocketMessage(parseData);
+        }
+    } else {
+        console.error("Received an empty or undefined message.");
+    }
+});
+
+//Handle the parsed socket message.
+function handleSocketMessage(parseData) {
+    console.log("-> handleSocketMessage Payload message from WebSocket", ["data = " + JSON.stringify(parseData), "filename = socket.js", "reference_code = K8rF7"]);
+}
+  </code>
+</body>
+</html>
